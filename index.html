@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stream or Download Content</title>
+    <style>
+        body {
+            margin: 0; padding: 0; background-color: #0b0f19;
+            font-family: Arial, sans-serif; color: #ffffff;
+            display: flex; justify-content: center; align-items: center; height: 100vh;
+        }
+        .container {
+            text-align: center; background: #161d30; padding: 30px;
+            border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.5); width: 90%; max-width: 450px;
+        }
+        .title { font-size: 22px; font-weight: bold; margin-bottom: 10px; color: #00d2ff; }
+        .status { font-size: 14px; color: #a0aec0; margin-bottom: 25px; }
+        .btn {
+            display: block; width: 100%; padding: 15px 0; background: linear-gradient(135deg, #ff007f, #7f00ff);
+            color: white; border: none; border-radius: 8px; font-size: 18px; font-weight: bold;
+            cursor: pointer; text-decoration: none; box-shadow: 0 4px 15px rgba(255, 0, 127, 0.4);
+            transition: transform 0.2s, filter 0.2s;
+        }
+        .btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
+        .spinner {
+            border: 4px solid rgba(255,255,255,0.1); width: 36px; height: 36px;
+            border-radius: 50%; border-left-color: #00d2ff; animation: spin 1s linear infinite;
+            margin: 0 auto 20px auto; display: none;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div id="loading-box">
+        <div class="spinner" id="spinner" style="display: block;"></div>
+        <div class="title" id="main-title">Fetching Secured Link...</div>
+        <div class="status" id="main-status">Connecting to high-speed server...</div>
+    </div>
+    
+    <!-- This button is hidden until the fake loading finishes -->
+    <a href="#" id="ad-btn" class="btn" style="display: none;" target="_blank">PROCEED TO CONTENT</a>
+</div>
+
+<script>
+    // CONFIGURATION: Paste your Adsterra Direct Link here
+    const ADSTERRA_URL = "https://www.effectivecpmnetwork.com/jmjmvmiy?key=010f02790cbf6f48a33a30de938626d4";
+    
+    // Optional: Real file/video link to redirect them to AFTER they click the ad
+    const DESTINATION_URL = "https://youtube.com"; 
+
+    // Fake loading sequence to build anticipation and trust
+    setTimeout(() => {
+        document.getElementById('main-title').innerText = "Link Ready!";
+        document.getElementById('main-status').innerText = "File size: 42.8 MB | Safe Scan: Passed";
+        document.getElementById('spinner').style.display = 'none';
+        
+        const btn = document.getElementById('ad-btn');
+        btn.href = ADSTERRA_URL;
+        btn.style.display = 'block';
+    }, 2000); // 2-second fake loading time
+
+    // Smart Redirect Loop
+    document.getElementById('ad-btn').addEventListener('click', function() {
+        // After they click and the Adsterra ad opens in a new tab,
+        // change this current bridge page tab to the actual content so they don't report your post.
+        setTimeout(() => {
+            window.location.href = DESTINATION_URL;
+        }, 1000);
+    });
+</script>
+
+</body>
+</html>
